@@ -77,3 +77,6 @@ for run the image
 ```
 docker run -p 5000:5000 -it   nameOfyourImage
 ```
+
+
+ 
