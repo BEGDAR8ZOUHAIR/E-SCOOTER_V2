@@ -1,48 +1,73 @@
-import MapView, {POROVIDER_GOOGLE } from 'react-native-maps';
-import { StyleSheet, View, Dimensions  } from 'react-native';
+import { StatusBar } from 'expo-status-bar';
+import React, { useState } from 'react';
+import { StyleSheet,LogBox } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { SafeAreaView } from 'react-native';
+import Onboarding from './pages/Onboarding';
+import Login from './pages/Login';
+import Register from './pages/Register';
+import Nav from './components/Nav';
 
+const Stack = createStackNavigator();
 
-const { width, height } = Dimensions.get('window');
+export default function App()
+{
+  
+  LogBox.ignoreLogs(['Remote debugger']);
 
-const ASPECT_RATIO = width / height;  
-const LATITUDE_DELTA = 0.015;
-const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
-
-const INITIAL_POSITION = {
-  latitude: 32.300815,
-  longitude: -9.227203,
-  latitudeDelta: LATITUDE_DELTA,
-  longitudeDelta: LONGITUDE_DELTA,
-};
-
-
-
-const App = () => {
 
   return (
-    <View style={styles.container}>
-      <MapView
-        style={styles.map}
-        provider={POROVIDER_GOOGLE}
-        initialRegion={INITIAL_POSITION}
-       
-      />
-    </View>
+
+
+    <SafeAreaView style={styles.container}>
+      <NavigationContainer>
+        <Stack.Navigator> 
+          <Stack.Screen 
+            name="Onboarding"
+            component={Onboarding}
+            options={{
+              headerShown: false
+            }}
+          />
+          <Stack.Screen
+            name="Login"
+            component={Login}
+            options={{
+              headerShown: false
+            }}
+          />
+          <Stack.Screen
+            name="Register"
+            component={Register}
+            options={{
+              headerShown: false
+            }}
+          />
+           <Stack.Screen
+          name="Nav"
+          component={Nav}
+          options={{
+            headerShown: false
+          }}
+        />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </SafeAreaView>
+
   );
-};
+
+}
+
+
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
   },
-  map: {
-    width: Dimensions.get('window').width,
-    height: Dimensions.get('window').height,
-  },
+
+
 });
 
-export default App;
+
 
