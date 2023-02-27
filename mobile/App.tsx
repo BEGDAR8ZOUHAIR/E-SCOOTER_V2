@@ -1,4 +1,4 @@
-import MapView from 'react-native-maps';
+import MapView, {POROVIDER_GOOGLE } from 'react-native-maps';
 import { StyleSheet, View, Dimensions  } from 'react-native';
 
 
@@ -23,12 +23,9 @@ const App = () => {
     <View style={styles.container}>
       <MapView
         style={styles.map}
-        region={{
-          latitude: 32.300815,
-          longitude:-9.227203,
-          latitudeDelta: 0.015,
-          longitudeDelta: 0.0121,
-        }}
+        provider={POROVIDER_GOOGLE}
+        initialRegion={INITIAL_POSITION}
+       
       />
     </View>
   );
