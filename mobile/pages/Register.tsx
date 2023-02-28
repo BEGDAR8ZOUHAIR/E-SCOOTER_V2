@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import {
@@ -8,44 +7,40 @@ import {
   TextInput,
   TouchableOpacity,
   Image,
+  Alert,
 } from "react-native";
 
 const Register = () => {
-    const navigation = useNavigation();
-    const [fullName, setFullName] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+  const navigation = useNavigation();
+  const [fullName, setFullName] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
 
-    const handleRegister = async () =>
-    {
-       try {
-            // const res = await fetch( "http://192.168.9.30:5000/client/register",
-       const res = await fetch("http://192.168.43.154:5000/client/register", {
-         method: "POST",
-         headers: {
-           "Content-Type": "application/json",
-           Accept: "application/json",
-         },
-         body: JSON.stringify({
-           fullName,
-           email,
-           password,
-         }),
-       });
-         const text = await res.text();
-         const data = JSON.parse(text);
-         if (data.error)
-         {
-            Alert.alert("Error", data.error, [{ text: "OK" }]);
-         } else
-         {
-            navigation.navigate("Login");
-         }
-       } catch (err)
-       {
-         
-          console.log(err);
-      }      
+  const handleRegister = async () => {
+    try {
+      // const res = await fetch("http://192.168.0.171:5000/client/register", {
+      const res = await fetch("http://192.168.9.30:5000/client/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          fullName,
+          email,
+          password,
+        }),
+      });
+      const text = await res.text();
+      const data = JSON.parse(text);
+      if (data.error) {
+        Alert.alert("Error", data.error, [{ text: "OK" }]);
+      } else {
+        navigation.navigate("Login");
+      }
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
@@ -85,9 +80,9 @@ const Register = () => {
           <Text style={styles.buttonText}>Register</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={() => navigation.navigate("Login")}>
-        <Text style={styles.registerText}>
-          Already have an account?  
-          <Text style={styles.registerLink}>Login now</Text>
+          <Text style={styles.registerText}>
+            Already have an account?
+            <Text style={styles.registerLink}>Login now</Text>
           </Text>
         </TouchableOpacity>
       </View>

@@ -1,14 +1,8 @@
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Home from '../pages/Home';
-import Dashboard from '../pages/Dashboard';
-import { Ionicons } from '@expo/vector-icons';
-import React from 'react';
-
-type TabBarIconProps = {
-  focused: boolean;
-  color: string;
-  size: number;
-};
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import Home from "../pages/Home";
+import Dashboard from "../pages/Dashboard";
+import { Ionicons } from "@expo/vector-icons";
+import React, { useState } from "react";
 
 const Tab = createBottomTabNavigator();
 
@@ -16,23 +10,35 @@ const Tabs = () => {
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
-        tabBarIcon: ({ focused, color, size }: TabBarIconProps) => {
-          const icons = {
-            Home: focused ? 'home' : 'home-outline',
-            Login: focused ? 'log-in' : 'log-in-outline',
-            Register: focused ? 'person-add' : 'person-add-outline',
-            Dashboard: focused ? 'list' : 'list-outline',
-          };
-
-          const iconName = icons[route.name as keyof typeof icons];
+        tabBarIcon: ({ focused, color, size }) => {
+          let iconName: string;
+          if (route.name === "Home") {
+            iconName = focused ? "home" : "home-outline";
+          } else if (route.name === "Login") {
+            iconName = focused ? "log-in" : "log-in-outline";
+          } else if (route.name === "Register") {
+            iconName = focused ? "person-add" : "person-add-outline";
+          } else if (route.name === "Dashboard") {
+            iconName = focused ? "list" : "list-outline";
+          } else {
+            iconName = "";
+          }
           return <Ionicons name={iconName} size={size} color={color} />;
         },
-        tabBarActiveTintColor: '#92E3A9',
-        tabBarInactiveTintColor: 'gray',
+        tabBarActiveTintColor: "#92E3A9",
+        tabBarInactiveTintColor: "gray",
       })}
     >
-      <Tab.Screen name="Home" component={Home} options={{ headerShown: false }} />
-      <Tab.Screen name="Dashboard" component={Dashboard} options={{ headerShown: false }} />
+      <Tab.Screen
+        name="Home"
+        component={Home}
+        options={{ headerShown: false }}
+      />
+      <Tab.Screen
+        name="Dashboard"
+        component={Dashboard}
+        options={{ headerShown: false }}
+      />
     </Tab.Navigator>
   );
 };

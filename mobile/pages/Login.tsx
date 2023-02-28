@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { useNavigation } from '@react-navigation/native';
 import {
@@ -11,36 +10,37 @@ import {
   Alert,
 } from "react-native";
 
-const LoginScreen = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+const LoginScreen = (): JSX.Element => {
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
   const navigation = useNavigation();
 
-    const handleLogin = async () => {
-        try {
-          const res = await fetch("http://192.168.43.154:5000/client/login", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              Accept: "application/json",
-            },
-            body: JSON.stringify({
-              email,
-              password,
-            }),
-          });
-          const text = await res.text();
-          const data = JSON.parse(text);
+  const handleLogin = async (): Promise<void> => {
+    try {
+      // const res = await fetch("http://192.168.0.171:5000/client/login", {
+      const res = await fetch("http://192.168.9.30:5000/client/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          email,
+          password,
+        }),
+      });
+      const text = await res.text();
+      const data = JSON.parse(text);
 
-          if (data.error) {
-            Alert.alert("Error", data.error, [{ text: "OK" }]);
-          } else {
-            navigation.navigate("Nav");
-          }
-        } catch (err) {
-          console.log(err);
-        }            
-    };
+      if (data.error) {
+        Alert.alert("Error", data.error, [{ text: "OK" }]);
+      } else {
+        navigation.navigate("Nav");
+      }
+    } catch (err) {
+      console.log(err);
+    }            
+  };
 
   return (
     <View style={styles.container}>

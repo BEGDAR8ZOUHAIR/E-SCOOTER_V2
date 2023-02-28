@@ -1,16 +1,24 @@
-
 import React, { useState, useEffect } from "react";
 import { StyleSheet, View, Image } from "react-native";
 import MapView, { Marker } from "react-native-maps";
 
-const App = () => {
-  const [markers, setMarkers] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+interface MarkerData {
+  name: string;
+  description: string;
+  latitude: number;
+  longitude: number;
+}
 
-  const loadMarkers = async () => {
+const App = (): JSX.Element => {
+  const [markers, setMarkers] = useState<MarkerData[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+
+  const loadMarkers = async (): Promise<void> => {
     try {
       const response = await fetch(
-        "http://192.168.43.154:5000/client/scooters"
+        // "http://192.168.43.154:5000/client/scooters"
+        "http://192.168.9.30:5000/client/scooters"
+
       );
       const text = await response.text();
       const data = JSON.parse(text);
@@ -38,7 +46,7 @@ const App = () => {
       >
         {isLoading
           ? null
-          : markers.map((marker, index) => (
+          : markers.map((marker: MarkerData, index: number) => (
               <Marker
                 key={index}
                 coordinate={{
@@ -69,21 +77,3 @@ const styles = StyleSheet.create({
 });
 
 export default App;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
