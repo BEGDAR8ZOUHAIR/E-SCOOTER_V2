@@ -18,7 +18,6 @@ const Header = () =>
               <a href="/" className="text-gray-600 hover:text-gray-800">
                 Dashboard
               </a>
-
             </li>
             <li className="ml-6">
               <a href="/" className="text-gray-600 hover:text-gray-800">
@@ -32,7 +31,13 @@ const Header = () =>
             </li>
           </ul>
         </div>
-        
+        <div class="md:ml-20">
+          <img
+            class="w-20 h-20 md:w-20 md:h-20 object-cover rounded-full border-2 border-pink-600 p-1"
+            src="https://images.unsplash.com/photo-1502791451862-7bd8c1df43a7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=700&q=80"
+            alt="profile"
+          />
+        </div>
       </nav>
     </header>
   );
