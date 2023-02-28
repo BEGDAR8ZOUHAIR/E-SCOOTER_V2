@@ -98,7 +98,7 @@ const ScooterCard: React.FC<{ scooter: Scooter }> = ({ scooter }) => {
       <Text style={battery > 20 ? styles.success : styles.failed}>
         {scooter.battery}
       </Text>
-      <Text style={scooter.status === "Disponible" ? styles.success : styles.failed}>
+      <Text style={scooter.status === "Desponible" ? styles.success : styles.failed}>
         {scooter.status}
       </Text>
       <TouchableOpacity style={styles.reserveButton}>

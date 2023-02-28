@@ -13,25 +13,25 @@ const App = (): JSX.Element => {
   const [markers, setMarkers] = useState<MarkerData[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  const loadMarkers = async (): Promise<void> => {
-    try {
-      const response = await fetch(
-        // "http://192.168.43.154:5000/client/scooters"
-        "http://192.168.9.30:5000/client/scooters"
+  // const loadMarkers = async (): Promise<void> => {
+  //   try {
+  //     const response = await fetch(
+  //       // "http://192.168.43.154:5000/client/scooters"
+  //       "http://192.168.9.30:5000/client/scooters"
 
-      );
-      const text = await response.text();
-      const data = JSON.parse(text);
-      setMarkers(data);
-      setIsLoading(false);
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  //     );
+  //     const text = await response.text();
+  //     const data = JSON.parse(text);
+  //     setMarkers(data);
+  //     setIsLoading(false);
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
 
-  useEffect(() => {
-    loadMarkers();
-  }, []);
+  // useEffect(() => {
+  //   loadMarkers();
+  // }, []);
 
   return (
     <View style={styles.container}>
